@@ -4,6 +4,7 @@ import { Open_Sans } from 'next/font/google'
 import { ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from '@/components/provider/theme-provider'
 import { cn } from '@/lib/utils'
+import { ModalProvider } from '@/components/provider/modal-provider'
 
 const font = Open_Sans({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           enableSystem={false}
           storageKey='ciscord-theme'
         >
+        <ModalProvider />
         {children}
         </ThemeProvider>
       </body>
