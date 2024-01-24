@@ -9,6 +9,8 @@ import { Input } from "../ui/input"
 import qs from "query-string"
 import axios from "axios"
 import { useModal } from "@/hooks/use-modal-store"
+import EmojiPicker from "../emoji-picker"
+import { useRouter } from "next/navigation"
 
 interface ChatInputProps{
     apiUrl: string,
@@ -31,6 +33,7 @@ const ChatInput = ({
 }: ChatInputProps) => {
 
     const { onOpen } = useModal()
+    const router = useRouter()
 
     //creating our form hook 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -51,6 +54,9 @@ const ChatInput = ({
             })
 
             await axios.post(url, values)
+
+            form.reset()
+            router.refresh()
         } catch (error) {
             console.log(error)
         }
@@ -85,7 +91,9 @@ const ChatInput = ({
                                     />
 
                                     <div className="absolute top-7 right-8">
-                                        <Smile />
+                                        <EmojiPicker
+                                            onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
+                                        />
                                     </div>
                                 </div>
                             </FormControl>
