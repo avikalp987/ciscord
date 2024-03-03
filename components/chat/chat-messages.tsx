@@ -128,7 +128,7 @@ const ChatMessages = ({
                     <Fragment
                         key={i}
                     >
-                        {group.items.map((message: MessageWithMemberWithProfile) => (
+                        {group.items?.map((message: MessageWithMemberWithProfile) => (
                             <ChatItem 
                                 currentMember={member}
                                 member={message.member}
